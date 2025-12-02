@@ -87,7 +87,7 @@
       text_color: "#1e293b",
       primary_action_color: "#fb923c",
       secondary_action_color: "#ec4899",
-      app_title: "🏛 แบ่งบิล",
+      app_title: "💰 แบ่งบิล",
       app_subtitle: "คำนวณการแบ่งเงินแบบง่ายดาย แยกรายชื่อและรายการอาหารที่ชัดเจน",
       total_amount_label: "💵 จำนวนเงินทั้งหมด (บาท)",
       people_section_title: "👥 รายชื่อคนในกลุ่ม",
@@ -114,8 +114,8 @@
     let currentView = 'main'; // 'main', 'payment', 'contact', 'summary'
     let paymentMethods = [
       { id: 1, name: 'PromptPay', detail: '0xx-xxx-xxxx', icon: '💳' },
-      { id: 2, name: 'ธนาคาร', detail: ' เลขทีบัญชี xxx-x-xxxxx-x', icon: '💰' },
-      { id: 3, name: 'True Money Wallet', detail: '0xx-xxx-xxxx', icon: '💵' }
+      { id: 2, name: 'ธนาคาร', detail: ' เลขที่บัญชี xxx-x-xxxxx-x', icon: '🏦' },
+      { id: 3, name: 'True Money Wallet', detail: '0xx-xxx-xxxx', icon: '💰' }
     ];
 
     let contactMethods = [
@@ -294,7 +294,7 @@
               <textarea 
                 id="payment-detail-${method.id}"
                 onchange="updatePaymentMethod(${method.id}, 'detail', this.value)"
-                placeholder="เช่น เลขบัญชี, เบอร์โทร"
+                placeholder="เช่น เลขบัญชี, เบอร์โทร, QR Code"
                 rows="2"
                 style="width: 100%; padding: 12px 16px; border: 2px solid white; border-radius: 8px; font-size: ${(config.font_size || defaultConfig.font_size)}px; color: ${config.text_color || defaultConfig.text_color}; font-weight: 600; resize: vertical;"
               >${method.detail}</textarea>
@@ -332,7 +332,7 @@
                 type="text" 
                 value="${method.name}"
                 onchange="updateContactMethod(${method.id}, 'name', this.value)"
-                placeholder="เช่น โทรศัพท์, Line ID, Facebook, Email"
+                placeholder="เช่น โทร���ัพท์, Line ID, Facebook, Email"
                 style="width: 100%; padding: 12px 16px; border: 2px solid white; border-radius: 8px; font-size: ${(config.font_size || defaultConfig.font_size)}px; color: ${config.text_color || defaultConfig.text_color}; font-weight: 600;"
               />
             </div>
@@ -342,7 +342,7 @@
               <textarea 
                 id="contact-detail-${method.id}"
                 onchange="updateContactMethod(${method.id}, 'detail', this.value)"
-                placeholder="เช่น เบอร์โทร, Line ID, Facebook, อีเมล"
+                placeholder="เช่น เบอร์โทร, Line ID, ลิงก์ Facebook, อีเมล"
                 rows="2"
                 style="width: 100%; padding: 12px 16px; border: 2px solid white; border-radius: 8px; font-size: ${(config.font_size || defaultConfig.font_size)}px; color: ${config.text_color || defaultConfig.text_color}; font-weight: 600; resize: vertical;"
               >${method.detail}</textarea>
@@ -430,7 +430,7 @@
 
     function savePaymentInfo() {
       const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
-      showToast('บันทึกข้อมูลช่องทางชำระเงินแล้ว ✓', config.primary_action_color || defaultConfig.primary_action_color);
+      showToast('บันทึกข้อมู���ช่องทางชำระเงินแล้ว ✓', config.primary_action_color || defaultConfig.primary_action_color);
       currentView = 'main';
       renderApp();
     }
@@ -447,7 +447,7 @@
 
     function saveContactInfo() {
       const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
-      showToast('บันทึกข้อมูลช่องทางติดต่อแล้ว ✓', config.secondary_action_color || defaultConfig.secondary_action_color);
+      showToast('บันทึกข้อมูลช่องทางติดต่อ���ล้ว ✓', config.secondary_action_color || defaultConfig.secondary_action_color);
       currentView = 'main';
       renderApp();
     }
@@ -498,7 +498,7 @@
             </div>
 
             <div style="background: ${config.background_color || defaultConfig.background_color}; border-radius: 12px; padding: 24px; margin-bottom: 32px;">
-              <h3 style="color: ${config.text_color || defaultConfig.text_color}; font-size: ${(config.font_size || defaultConfig.font_size) * 1.5}px; font-weight: 800; margin: 0 0 20px 0;">🍽️ รายการอาหาร/เครื่องดื่ม (${items.length} รายการ)</h3>
+              <h3 style="color: ${config.text_color || defaultConfig.text_color}; font-size: ${(config.font_size || defaultConfig.font_size) * 1.5}px; font-weight: 800; margin: 0 0 20px 0;">🍽️ รายการอาหาร/��ครื่องดื่ม (${items.length} รายการ)</h3>
       `;
 
       if (items.length === 0) {
@@ -586,7 +586,7 @@
       }
 
       if (people.length === 0) {
-        showToast('กรุณาเพิ่มคนอย่างน้อย 1 คน', config.secondary_action_color || defaultConfig.secondary_action_color);
+        showToast('กรุณาเพิ่มคนอย่าง���้อย 1 คน', config.secondary_action_color || defaultConfig.secondary_action_color);
         return;
       }
 
@@ -670,15 +670,25 @@
               </div>
             `;
           });
-         
+          
+          html += `
+              <div style="margin-top: 12px; padding-top: 12px; border-top: 2px solid ${config.background_color || defaultConfig.background_color}; display: flex; justify-content: space-between;">
+                <span style="color: ${config.text_color || defaultConfig.text_color}; font-size: ${(config.font_size || defaultConfig.font_size) * 0.875}px; font-weight: 600;">รวมรายกา��ส่วนตัว:</span>
+                <span style="color: ${config.primary_action_color || defaultConfig.primary_action_color}; font-size: ${(config.font_size || defaultConfig.font_size) * 0.875}px; font-weight: 700;">${result.itemsTotal.toFixed(2)} ฿</span>
+              </div>
+            </div>
+          `;
+        }
 
         html += `
             <div style="background: white; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
               <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                <span style="color: ${config.text_color || defaultConfig.text_color}; font-size: ${(config.font_size || defaultConfig.font_size) * 0.875}px;">รายการส่วนตัว:</span>
+                <span style="color: ${config.text_color || defaultConfig.text_color}; font-size: ${(config.font_size || defaultConfig.font_size) * 0.875}px;">รายการส่���นตัว:</span>
                 <span style="color: ${config.text_color || defaultConfig.text_color}; font-size: ${(config.font_size || defaultConfig.font_size) * 0.875}px; font-weight: 600;">${result.itemsTotal.toFixed(2)} ฿</span>
               </div>
-              
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: ${config.text_color || defaultConfig.text_color}; font-size: ${(config.font_size || defaultConfig.font_size) * 0.875}px;">ส่วนแบ่งร่วม:</span>
+                <span style="color: ${config.text_color || defaultConfig.text_color}; font-size: ${(config.font_size || defaultConfig.font_size) * 0.875}px; font-weight: 600;">${result.sharedAmount.toFixed(2)} ฿</span>
               </div>
             </div>
             <div style="background: linear-gradient(135deg, ${config.primary_action_color || defaultConfig.primary_action_color}, ${config.secondary_action_color || defaultConfig.secondary_action_color}); padding: 16px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
@@ -745,7 +755,7 @@
 
             <div style="background: linear-gradient(135deg, ${config.primary_action_color || defaultConfig.primary_action_color}10, ${config.secondary_action_color || defaultConfig.secondary_action_color}10); border-radius: 12px; padding: 20px; margin-bottom: 24px; border-left: 4px solid ${config.primary_action_color || defaultConfig.primary_action_color};">
               <div style="color: ${config.text_color || defaultConfig.text_color}; font-size: ${(config.font_size || defaultConfig.font_size) * 0.875}px; line-height: 1.6;">
-                <strong>💡 คำแนะนำ:</strong> เพิ่มช่องทางชำระเงินที่คุณต้องการ เช่น PromptPay, ธนาคาร, True Money Wallet หรือช่องทางอื่นๆ ตามความต้องการ
+                <strong>💡 คำแนะนำ:</strong> เพิ่มช่องทางชำระเงินที่คุณต้องการ เช่น PromptPay, ธนาคาร, True Money Wallet หรือช่องทางอื่นๆ ตามความต้องกา���
               </div>
             </div>
 
@@ -782,12 +792,12 @@
                 onclick="backToMain()"
                 style="width: 44px; height: 44px; background: ${config.background_color || defaultConfig.background_color}; color: ${config.text_color || defaultConfig.text_color}; border: none; border-radius: 50%; cursor: pointer; font-size: ${(config.font_size || defaultConfig.font_size) * 1.25}px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0;"
               >←</button>
-              <h1 style="color: ${config.text_color || defaultConfig.text_color}; font-size: ${(config.font_size || defaultConfig.font_size) * 2}px; font-weight: 900; margin: 0;">📞 การจัดการช่องทางติดต่อ</h1>
+              <h1 style="color: ${config.text_color || defaultConfig.text_color}; font-size: ${(config.font_size || defaultConfig.font_size) * 2}px; font-weight: 900; margin: 0;">📞 ��ัดการช่องทางติดต่อ</h1>
             </div>
 
             <div style="background: linear-gradient(135deg, ${config.secondary_action_color || defaultConfig.secondary_action_color}10, ${config.primary_action_color || defaultConfig.primary_action_color}10); border-radius: 12px; padding: 20px; margin-bottom: 24px; border-left: 4px solid ${config.secondary_action_color || defaultConfig.secondary_action_color};">
               <div style="color: ${config.text_color || defaultConfig.text_color}; font-size: ${(config.font_size || defaultConfig.font_size) * 0.875}px; line-height: 1.6;">
-                <strong>💡 คำแนะนำ:</strong> เพิ่มช่องทางติดต่อที่คุณต้องการ เช่น โทรศัพท์, Line ID, Facebook, Email, Instagram หรือช่องทางอื่นๆ ตามความต้องการ
+                <strong>💡 คำแนะนำ:</strong> เพิ่มช่องทางติดต่อ���ี่คุณต้องการ เช่น โทรศัพท์, Line ID, Facebook, Email, Instagram หรือช่องทางอื่นๆ ตามความต้องการ
               </div>
             </div>
 
@@ -845,7 +855,7 @@
               onclick="removePerson(${person.id})"
               aria-label="ลบคน"
               style="width: 100%; padding: 6px 12px; background: ${config.secondary_action_color || defaultConfig.secondary_action_color}; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: ${(config.font_size || defaultConfig.font_size) * 0.75}px; font-weight: 600;"
-            >🗑️ ลบ</button>
+            >🗑️ ��บ</button>
           </div>
         `;
       });
@@ -1284,4 +1294,3 @@
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a79ecfa236fd034',t:'MTc2NDY2OTA4Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
